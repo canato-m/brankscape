@@ -25,8 +25,10 @@ def make_color_arr(cap):
     while True:
         framenum += 1
         ret, frame = cap.read()
+        frame = int(frame) # np.array(frame, dtype=np.uint8)
+        hsv = cv.cvtColor(frame, cv.COLOR_BGR2HSV)
         if ret and framenum % RATIO == 0:
-            img.append(frame)
+            img.append(hsv)
             if framenum % FRAME_RATE == 0:
                 framenum = 0
         elif ret is False:
